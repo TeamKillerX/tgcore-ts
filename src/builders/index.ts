@@ -1,2 +1,2 @@
-export { KeyboardBuilder } from "./keyboard"
-export type { InlineKeyboardMarkup, InlineKeyboardButton } from "./keyboard"
+export { KeyboardBuilder } from "./keyboard.js"
+export type { InlineKeyboardMarkup, InlineKeyboardButton } from "./keyboard.js"
