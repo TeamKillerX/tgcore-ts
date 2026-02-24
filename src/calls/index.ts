@@ -12,7 +12,7 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 */
 
-import { SendMessageBuilder } from "./sendMessage"
+import { SendMessageBuilder } from "./sendMessage.js"
 
 export class CallMethods {
   constructor(private http: any) {}
