@@ -1,6 +1,6 @@
 import { Http } from "./http.js"
 import { RawMethods } from "./raw/methods.js"
-import { CallMethods } from "./calls.js"
+import { CallMethods } from "./calls"
 
 export type ClientOptions = {
   api_key: string
