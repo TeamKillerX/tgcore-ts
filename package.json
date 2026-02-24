@@ -1,0 +1,33 @@
+{
+  "name": "@xtsea/tgcore-ts",
+  "version": "0.1.0",
+  "description": "tgcore TypeScript SDK • Telegram Engine Client",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
+  "author": "XTSEA",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeamKillerX/tgcore-ts"
+  },
+  "keywords": [
+    "tgcore",
+    "telegram",
+    "sdk",
+    "api",
+    "typescript"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
