@@ -1,5 +1,5 @@
-import { Http } from "./http.js"
-import { RawMethods } from "./raw/methods.js"
+import { Http } from "./http"
+import { RawMethods } from "./raw/methods"
 import { CallMethods } from "./calls"
 
 export type ClientOptions = {
