@@ -22,7 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "build": "tsup src/index.ts --format esm,cjs --dts --target es2020 --clean",
     "dev": "tsup src/index.ts --watch",
     "clean": "rm -rf dist"
   },
