@@ -70,7 +70,6 @@ export class KeyboardBuilder {
 
     const actionKeys = [
       "url",
-      "style",
       "callback_data",
       "web_app",
       "login_url",
