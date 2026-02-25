@@ -13,6 +13,7 @@
 */
 
 import { SendMessageBuilder } from "./sendMessage"
+import { SendPhotoBuilder } from "./sendPhoto"
 
 export class CallMethods {
   constructor(private http: any) {}
@@ -21,6 +22,13 @@ export class CallMethods {
     return new SendMessageBuilder(
       this.http,
       "/api/v2/sendMessage"
+    )
+  }
+
+  sendPhoto() {
+    return new SendPhotoBuilder(
+      this.http,
+      "/api/v2/sendPhoto"
     )
   }
 }
