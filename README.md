@@ -34,9 +34,11 @@ npm install @xtsea/tgcore-ts
 ## Getting started
 
 ```ts
-import { Client } from "@xtsea/tgcore-ts"
+import { tgcore } from "@xtsea/tgcore-ts"
 
-const tg = new Client({ api_key: "fw_live_xxx" })
+// old version: 0.1.9 new Client({})
+
+const tg = tgcore({ api_key: "fw_live_xxx" }) // version: 0.1.10
 
 await tg.raw.sendMessage({
   chat_id: -1001234567890,
