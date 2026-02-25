@@ -24,6 +24,10 @@ export class SendPhotoBuilder extends BaseCallBuilder {
     return this.set("photo", url)
   }
 
+  caption(caption: string) {
+    return this.set("caption", caption)
+  }
+
   parseMode(mode: "HTML" | "Markdown" | "MarkdownV2") {
     return this.set("parse_mode", mode)
   }
