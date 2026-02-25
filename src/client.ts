@@ -17,7 +17,7 @@ export class Client {
   public raw: RawMethods
   public calls: CallMethods
 
-  constructor(opts: ClientOptions) {
+  constructor(private opts: ClientOptions) {
     if (!opts?.api_key) {
       throw new Error("tgcore-ts: api_key is required")
     }
