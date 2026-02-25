@@ -1,6 +1,6 @@
 {
   "name": "@xtsea/tgcore-ts",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "tgcore TypeScript SDK • Telegram Engine Client",
   "type": "module",
   "main": "./dist/index.cjs",
