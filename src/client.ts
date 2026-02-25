@@ -8,6 +8,10 @@ export type ClientOptions = {
   timeout_ms?: number
 }
 
+export function tgcore(options: ClientOptions) {
+  return new Client(options)
+}
+
 export class Client {
   private http: Http
   public raw: RawMethods
