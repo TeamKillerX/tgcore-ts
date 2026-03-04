@@ -34,16 +34,30 @@ npm install @xtsea/tgcore-ts
 ## Getting started
 
 ```ts
-import { tgcore } from "@xtsea/tgcore-ts"
+import { tgcore, KeyboardBuilder } from "@xtsea/tgcore-ts"
 
 // old version: 0.1.9 new Client({})
 
-const tg = tgcore({ api_key: "fw_live_xxx" }) // version: 0.1.10
+const tg = tgcore({ api_key: "fw_live_xxx" }) // latest version
 
 await tg.raw.sendMessage({
   chat_id: -1001234567890,
   text: "Hello from tgcore-ts"
 })
+
+
+const keyboard = KeyboardBuilder
+  .inline()
+  .callback("Yes", "yes")
+  .callback("No", "no")
+  .build()
+
+await tg.calls
+  .sendMessage()
+  .chatId(123)
+  .text("Confirm?")
+  .replyMarkup(keyboard)
+  .execute()
 ```
 
 ## Why TGCore?
