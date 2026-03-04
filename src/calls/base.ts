@@ -32,7 +32,7 @@ export abstract class BaseCallBuilder<T = any> {
   }
 
   async execute(): Promise<TgResponse<T>> {
-    return this.http.post(this.path, this.params)
+    return this.http.post({ path: this.path, body: this.params })
   }
 
   async throw(): Promise<T> {
