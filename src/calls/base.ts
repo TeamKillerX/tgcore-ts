@@ -12,14 +12,13 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 */
 
-import { Http } from "../http"
 import { TgResponse } from "../types/TgResponse"
 
 export abstract class BaseCallBuilder<T = any> {
   protected params: Record<string, any> = {}
 
   constructor(
-    protected http: Http,
+    protected client: any,
     protected path: string,
     protected method: "POST" | "GET" = "POST"
   ) {}
@@ -32,7 +31,7 @@ export abstract class BaseCallBuilder<T = any> {
   }
 
   async execute(): Promise<TgResponse<T>> {
-    return this.http.post({ path: this.path, body: this.params })
+    return this.client.request(this.path, this.params)
   }
 
   async throw(): Promise<T> {

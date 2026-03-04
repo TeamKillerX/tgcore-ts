@@ -18,6 +18,10 @@ export class Client {
     this.middlewares.push(mw)
     return this
   }
+
+  async request(path: string, body?: any) {
+    return this.http.post({ path, body })
+  }
   constructor(opts: ClientOptions) {
     if (!opts?.api_key) {
       throw new Error("tgcore-ts: api_key is required")
