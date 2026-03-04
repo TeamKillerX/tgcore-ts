@@ -1,22 +1,8 @@
 import { Http } from "./http"
 import { RawMethods } from "./raw/methods"
 import { CallMethods } from "./calls"
-
-export type ClientOptions = {
-  api_key: string
-  base_url?: string
-  timeout_ms?: number
-}
-
-export type MiddlewareContext = {
-  method: string
-  payload?: any
-}
-
-export type Middleware = (
-  ctx: MiddlewareContext,
-  next: () => Promise<any>
-) => Promise<any>
+import { ClientOptions } from "./types/ClientOptions"
+import { Middleware } from "./types/Middleware"
 
 export function tgcore(options: ClientOptions): Client {
   return new Client(options)
