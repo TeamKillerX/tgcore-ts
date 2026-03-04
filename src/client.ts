@@ -11,6 +11,7 @@ export function tgcore(options: ClientOptions): Client {
 export class Client {
   private http: Http
   private middlewares: Middleware[] = []
+
   public raw: RawMethods
   public calls: CallMethods
 
@@ -19,10 +20,8 @@ export class Client {
     return this
   }
 
-  async request(path: string, body?: any) {
-    return this.http.post({ path, body })
-  }
   constructor(opts: ClientOptions) {
+
     if (!opts?.api_key) {
       throw new Error("tgcore-ts: api_key is required")
     }
@@ -33,7 +32,12 @@ export class Client {
       timeout_ms: opts.timeout_ms ?? 30000
     })
 
-    this.calls = new CallMethods(this.http)
-    this.raw = new RawMethods(this.http)
+    this.calls = new CallMethods(this)
+    this.raw = new RawMethods(this)
   }
+
+  async request(path: string, body?: any) {
+    return this.http.post(path, body)
+  }
+
 }
