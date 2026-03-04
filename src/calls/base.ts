@@ -12,8 +12,6 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 */
 
-import { TgResponse } from "../types/TgResponse"
-
 export abstract class BaseCallBuilder<T = any> {
   protected params: Record<string, any> = {}
 
@@ -30,7 +28,7 @@ export abstract class BaseCallBuilder<T = any> {
     return this
   }
 
-  async execute(): Promise<TgResponse<unknown>> {
+  async execute(): Promise<T> {
     return this.client.request(this.path, this.params)
   }
 
