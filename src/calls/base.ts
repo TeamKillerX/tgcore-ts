@@ -30,7 +30,7 @@ export abstract class BaseCallBuilder<T = any> {
     return this
   }
 
-  async execute(): Promise<TgResponse<T>> {
+  async execute(): Promise<TgResponse<unknown>> {
     return this.client.request(this.path, this.params)
   }
 
