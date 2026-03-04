@@ -12,33 +12,8 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 */
 
-export type InlineKeyboardButton = {
-  text: string
-  url?: string
-  style?: string
-  callback_data?: string
-  web_app?: { url: string }
-  login_url?: {
-    url: string
-    forward_text?: string
-    bot_username?: string
-    request_write_access?: boolean
-  }
-  switch_inline_query?: string
-  switch_inline_query_current_chat?: string
-  switch_inline_query_chosen_chat?: {
-    query?: string
-    allow_user_chats?: boolean
-    allow_bot_chats?: boolean
-    allow_group_chats?: boolean
-    allow_channel_chats?: boolean
-  }
-  copy_text?: { text: string }
-}
-
-export type InlineKeyboardMarkup = {
-  inline_keyboard: InlineKeyboardButton[][]
-}
+import { InlineKeyboardButton } from "../types/InlineKeyboardButton"
+import { InlineKeyboardMarkup } from "../types/InlineKeyboardMarkup"
 
 export class KeyboardBuilder {
   private keyboard: InlineKeyboardButton[][] = [[]]
@@ -79,7 +54,7 @@ export class KeyboardBuilder {
       "copy_text",
     ] as const
 
-    const used = actionKeys.filter(k => (btn as any)[k] != null)
+    const used = actionKeys.filter(k => (btn as Record<string, unknown>)[k] != null)
     if (used.length !== 1) {
       throw new Error(`InlineKeyboardButton must have exactly 1 action field, got: ${used.join(", ") || "none"}`)
     }
@@ -94,6 +69,14 @@ export class KeyboardBuilder {
 
     this.currentRow().push(btn)
     return this
+  }
+
+  callbackJson(text: string, obj: any) {
+    return this.callback(text, JSON.stringify(obj))
+  }
+
+  button(btn: InlineKeyboardButton) {
+    return this.push(btn)
   }
 
   url(text: string, url: string) {

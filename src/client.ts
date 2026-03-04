@@ -1,12 +1,8 @@
 import { Http } from "./http"
 import { RawMethods } from "./raw/methods"
 import { CallMethods } from "./calls"
-
-export type ClientOptions = {
-  api_key: string
-  base_url?: string
-  timeout_ms?: number
-}
+import { ClientOptions } from "./types/ClientOptions"
+import { Middleware } from "./types/Middleware"
 
 export function tgcore(options: ClientOptions): Client {
   return new Client(options)
@@ -14,9 +10,14 @@ export function tgcore(options: ClientOptions): Client {
 
 export class Client {
   private http: Http
+  private middlewares: Middleware[] = []
   public raw: RawMethods
   public calls: CallMethods
 
+  use(mw: Middleware) {
+    this.middlewares.push(mw)
+    return this
+  }
   constructor(opts: ClientOptions) {
     if (!opts?.api_key) {
       throw new Error("tgcore-ts: api_key is required")
