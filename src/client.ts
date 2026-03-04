@@ -8,6 +8,16 @@ export type ClientOptions = {
   timeout_ms?: number
 }
 
+export type MiddlewareContext = {
+  method: string
+  payload?: any
+}
+
+export type Middleware = (
+  ctx: MiddlewareContext,
+  next: () => Promise<any>
+) => Promise<any>
+
 export function tgcore(options: ClientOptions): Client {
   return new Client(options)
 }
@@ -16,6 +26,8 @@ export class Client {
   private http: Http
   public raw: RawMethods
   public calls: CallMethods
+
+  private middlewares: Middleware[] = []
 
   constructor(opts: ClientOptions) {
     if (!opts?.api_key) {
