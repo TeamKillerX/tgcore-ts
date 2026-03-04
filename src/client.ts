@@ -19,9 +19,6 @@ export class Client {
     return this
   }
 
-  async request(path: string, body?: any) {
-    return this.http.post({ path, body })
-  }
   constructor(opts: ClientOptions) {
     if (!opts?.api_key) {
       throw new Error("tgcore-ts: api_key is required")
@@ -35,5 +32,9 @@ export class Client {
 
     this.calls = new CallMethods(this.http)
     this.raw = new RawMethods(this.http)
+  }
+
+  async request(path: string, body?: any) {
+    return this.http.post(path, body)
   }
 }
