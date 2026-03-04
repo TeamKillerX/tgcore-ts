@@ -13,11 +13,7 @@
 */
 
 import { Http } from "../http"
-
-type TgResponse<T> = {
-  ok: boolean
-  data?: T
-}
+import { TgResponse } from "../types/TgResponse"
 
 export abstract class BaseCallBuilder<T = any> {
   protected params: Record<string, any> = {}
