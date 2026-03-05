@@ -1,6 +1,7 @@
 import { Http } from "./http"
 import { RawMethods } from "./raw/methods"
 import { CallMethods } from "./calls"
+import { OrWebMethods } from "./orweb"
 import { ClientOptions } from "./types/ClientOptions"
 import { Middleware } from "./types/Middleware"
 
@@ -14,6 +15,7 @@ export class Client {
 
   public raw: RawMethods
   public calls: CallMethods
+  public x: OrWebMethods
 
   use(mw: Middleware) {
     this.middlewares.push(mw)
@@ -34,6 +36,7 @@ export class Client {
 
     this.calls = new CallMethods(this)
     this.raw = new RawMethods(this)
+    this.x = new OrWebMethods(this)
   }
 
   async request(path: string, body?: any) {
