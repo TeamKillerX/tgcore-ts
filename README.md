@@ -79,7 +79,8 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
-async def get_database_from_mongodb(public_id: str):
+async def get_database_token():
+    # Your own code
     # You need to add a database for example (mongodb, redis)
     # Optional: AES-256-GCM
     pass
@@ -91,21 +92,17 @@ class SendMessageBody(BaseModel):
 
 @router.post("/api/v2/sendMessage")
 async def send_message(body: SendMessageBody):
-    token = await get_database_from_mongodb("public_id_here")
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    try:
-        async with httpx.AsyncClient(timeout=20) as client:
-            r = await client.post(
-                url,
-                json=body.model_dump(exclude_none=True)
-            )
-        data = r.json() if r.headers.get("content-type", "").startswith("application/json") else {"raw": r.text}
-        return {"ok": bool(data.get("ok", False)) and r.status_code == 200, "data": data}
+    token = await get_database_token()
 
-    except httpx.HTTPError as e:
-        raise HTTPException(502, f"Telegram request failed: {e}")
-    except Exception as e:
-        raise HTTPException(500, str(e))
+    async with httpx.AsyncClient() as client:
+        r = await client.post(
+            f"https://api.telegram.org/bot{token}/sendMessage",
+            json={
+                "chat_id": body.chat_id,
+                "text": body.text
+            }
+        )
+    return r.json()
 ```
 
 ## Why TGCore?
