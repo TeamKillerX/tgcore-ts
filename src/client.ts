@@ -30,7 +30,7 @@ export class Client {
 
     this.http = new Http({
       api_key: opts.api_key,
-      base_url: opts.base_url ?? "https://services-pro.ryzenths.dpdns.org",
+      base_url: opts.base_url ?? "https://tgcore.ryzenths.dpdns.org",
       timeout_ms: opts.timeout_ms ?? 30000
     })
 
