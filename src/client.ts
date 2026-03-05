@@ -1,6 +1,7 @@
 import { Http } from "./http"
 import { RawMethods } from "./raw/methods"
 import { CallMethods } from "./calls"
+import { OrWebMethods } from "./orweb"
 import { ClientOptions } from "./types/ClientOptions"
 import { Middleware } from "./types/Middleware"
 
@@ -14,6 +15,7 @@ export class Client {
 
   public raw: RawMethods
   public calls: CallMethods
+  public x: OrWebMethods
 
   use(mw: Middleware) {
     this.middlewares.push(mw)
@@ -28,12 +30,13 @@ export class Client {
 
     this.http = new Http({
       api_key: opts.api_key,
-      base_url: opts.base_url ?? "https://services-pro.ryzenths.dpdns.org",
+      base_url: opts.base_url ?? "https://tgcore.ryzenths.dpdns.org",
       timeout_ms: opts.timeout_ms ?? 30000
     })
 
     this.calls = new CallMethods(this)
     this.raw = new RawMethods(this)
+    this.x = new OrWebMethods(this)
   }
 
   async request(path: string, body?: any) {
