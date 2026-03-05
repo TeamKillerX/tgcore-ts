@@ -12,12 +12,12 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 */
 
-import { PinteRestBuilder } from "./pinteRest"
+import { PinteRestBuilder } from "./pinterest"
 
 export class OrWebMethods {
   constructor(private client: any) {}
 
-  pinteRest() {
+  pinterest() {
     return new PinteRestBuilder(
       this.client,
       "/api/web/pinterest"
