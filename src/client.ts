@@ -36,7 +36,7 @@ export class Client {
 
     this.calls = new CallMethods(this)
     this.raw = new RawMethods(this)
-    this.x = new OrWebMethods(this)
+    this.orweb = new OrWebMethods(this)
   }
 
   async request(path: string, body?: any) {
