@@ -15,7 +15,7 @@ export class Client {
 
   public raw: RawMethods
   public calls: CallMethods
-  public x: OrWebMethods
+  public orweb: OrWebMethods
 
   use(mw: Middleware) {
     this.middlewares.push(mw)
