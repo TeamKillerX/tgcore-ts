@@ -60,6 +60,50 @@ await tg.calls
   .execute()
 ```
 
+## Backend FastAPI
+- [ ] Optional: Support Proxy
+- [ ] Optional: Support Webhook
+- [ ] Optional: Typescript full stack
+- [ ] Optional: Multi Bot Token
+- [ ] Optional: Web-based API Key
+- [ ] Optional: Security audit
+- [ ] Optional: AES-256-GCM (You don't need but it leaks)
+```py
+import httpx
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+
+router = APIRouter()
+
+async def get_database_from_mongodb(public_id: str):
+    # You need to add a database for example (mongodb, redis)
+    # Optional: AES-256-GCM
+    pass
+
+class SendMessageBody(BaseModel):
+    # your own code
+    chat_id: int
+    text: str
+
+@router.post("/api/v2/sendMessage")
+async def send_message(body: SendMessageBody):
+    token = await get_database_from_mongodb("public_id_here")
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    try:
+        async with httpx.AsyncClient(timeout=20) as client:
+            r = await client.post(
+                url,
+                json=body.model_dump(exclude_none=True)
+            )
+        data = r.json() if r.headers.get("content-type", "").startswith("application/json") else {"raw": r.text}
+        return {"ok": bool(data.get("ok", False)) and r.status_code == 200, "data": data}
+
+    except httpx.HTTPError as e:
+        raise HTTPException(502, f"Telegram request failed: {e}")
+    except Exception as e:
+        raise HTTPException(500, str(e))
+```
+
 ## Why TGCore?
 
 Unlike traditional Telegram SDKs, TGCore is built as a **secure middleware layer** that prevents token leaks, enforces API-key auth, and supports enterprise-grade scaling.
