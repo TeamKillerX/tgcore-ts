@@ -60,14 +60,18 @@ await tg.calls
   .execute()
 ```
 
-## Backend FastAPI
-- [ ] Optional: Support Proxy
-- [ ] Optional: Support Webhook
-- [ ] Optional: Typescript full stack
-- [ ] Optional: Multi Bot Token
-- [ ] Optional: Web-based API Key
-- [ ] Optional: Security audit
-- [ ] Optional: AES-256-GCM (You don't need but it leaks)
+## Reference Backend (FastAPI)
+**Optional features**
+
+☐ Proxy support  
+☐ Webhook support  
+☐ TypeScript full-stack integration  
+☐ Multi bot token support  
+☐ Web-based API key management  
+☐ Security audit logging  
+☐ AES-256-GCM encryption
+
+**Optional:** AES-256-GCM encryption for sensitive tokens
 ```py
 import httpx
 from fastapi import APIRouter, HTTPException
