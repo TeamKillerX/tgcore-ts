@@ -7,7 +7,7 @@ type HttpOptions = {
 export class Http {
   constructor(private opts: HttpOptions) {}
 
-  async post(path: string, body: any) {
+  async post(path: string, body?: any) {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), this.opts.timeout_ms)
 
