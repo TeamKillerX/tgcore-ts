@@ -14,7 +14,7 @@
 
 import { BaseCallBuilder } from "../calls/base"
 
-export class PinteRestBuilder extends BaseCallBuilder {
+export class PinterestBuilder extends BaseCallBuilder {
 
   query(text: string) {
     return this.set("query", text)
