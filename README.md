@@ -60,6 +60,51 @@ await tg.calls
   .execute()
 ```
 
+## Reference Backend (FastAPI)
+**Optional features**
+
+☐ Proxy support  
+☐ Webhook support  
+☐ TypeScript full-stack integration  
+☐ Multi bot token support  
+☐ Web-based API key management  
+☐ Security audit logging  
+☐ AES-256-GCM encryption
+
+**Optional:** AES-256-GCM encryption for sensitive tokens
+```py
+import httpx
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+
+router = APIRouter()
+
+async def get_database_token():
+    # Your own code
+    # You need to add a database for example (mongodb, redis)
+    # Optional: AES-256-GCM
+    pass
+
+class SendMessageBody(BaseModel):
+    # your own code
+    chat_id: int
+    text: str
+
+@router.post("/api/v2/sendMessage")
+async def send_message(body: SendMessageBody):
+    token = await get_database_token()
+
+    async with httpx.AsyncClient() as client:
+        r = await client.post(
+            f"https://api.telegram.org/bot{token}/sendMessage",
+            json={
+                "chat_id": body.chat_id,
+                "text": body.text
+            }
+        )
+    return r.json()
+```
+
 ## Why TGCore?
 
 Unlike traditional Telegram SDKs, TGCore is built as a **secure middleware layer** that prevents token leaks, enforces API-key auth, and supports enterprise-grade scaling.
