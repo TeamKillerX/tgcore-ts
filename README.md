@@ -63,12 +63,12 @@ await tg.calls
 ## Reference Backend (FastAPI)
 **Optional features**
 
-☐ Proxy support  
-☐ Webhook support  
-☐ TypeScript full-stack integration  
-☐ Multi bot token support  
-☐ Web-based API key management  
-☐ Security audit logging  
+☐ Proxy support
+☐ Webhook support
+☐ TypeScript full-stack integration
+☐ Multi bot token support
+☐ Web-based API key management
+☐ Security audit logging
 ☐ AES-256-GCM encryption
 
 **Optional:** AES-256-GCM encryption for sensitive tokens
